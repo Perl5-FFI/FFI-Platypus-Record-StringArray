@@ -3,7 +3,7 @@ package FFI::Platypus::Record::StringArray;
 use strict;
 use warnings;
 use 5.008001;
-use FFI::Platypus;
+use FFI::Platypus 0.96;
 use constant _ptr_size => FFI::Platypus->new->sizeof('opaque');
 
 # ABSTRACT: Array of strings for your FFI record
@@ -16,7 +16,8 @@ use constant _ptr_size => FFI::Platypus->new->sizeof('opaque');
 
 =head1 DESCRIPTION
 
-Experimental interface for an array of C strings.
+Experimental interface for an array of C strings, useful for FFI record
+classes.
 
 =head1 CONSTRUCTOR
 
@@ -38,11 +39,12 @@ sub new
 
   my $perl_array = [map { defined $_ ? "$_" : undef } @_];
   my $array_size = _ptr_size * @_;
+  my $type       = "record($array_size)";
 
   my $self = bless {
     perl_array => $perl_array,
-    c_array    => $ffi->cast( 'string[]' => "record($array_size)", $perl_array),
-    array_size => $array_size,
+    c_array    => $ffi->cast( 'string[]' => $type, $perl_array),
+    type       => $type,
   }, $class;
 }
 
@@ -59,8 +61,8 @@ Returns the opaque pointer to the array of C strings.
 sub opaque
 {
   my($self) = @_;
-  my $array_size = $self->{array_size};
-  $self->{opaque} ||= $ffi->cast( "record($array_size)" => 'opaque', $self->{c_array});
+  my $type = $self->{type};
+  $self->{opaque} ||= $ffi->cast( $type => 'opaque', $self->{c_array});
 }
 
 =head2 size

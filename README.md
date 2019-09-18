@@ -9,7 +9,8 @@ Array of strings for your FFI record
 
 # DESCRIPTION
 
-Experimental interface for an array of C strings.
+Experimental interface for an array of C strings, useful for FFI record
+classes.
 
 # CONSTRUCTOR
 
