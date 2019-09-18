@@ -12,6 +12,17 @@ Array of strings for your FFI record
 Experimental interface for an array of C strings, useful for FFI record
 classes.
 
+The Platypus record class doesn't easily support an array of strings,
+and trying to use an `opaque` type to implement this is possible but more
+than a little arcane.  This class provides an interface for creating
+a C array of strings which can be used to provide an `opaque` pointer
+than can be used by an [FFI::Platypus::Record](https://metacpan.org/pod/FFI::Platypus::Record) object.
+
+Care needs to be taken!  Because Perl has no way of knowing if/when
+the opaque pointer is no longer being used by C, you have to make
+sure that the [FFI::Platypus::Record::StringArray](https://metacpan.org/pod/FFI::Platypus::Record::StringArray) instance remains
+in scope for as long as the `opaque` pointer is in use by C.
+
 # CONSTRUCTOR
 
 ## new

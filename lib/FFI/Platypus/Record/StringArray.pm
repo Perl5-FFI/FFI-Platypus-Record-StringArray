@@ -19,6 +19,17 @@ use constant _ptr_size => FFI::Platypus->new->sizeof('opaque');
 Experimental interface for an array of C strings, useful for FFI record
 classes.
 
+The Platypus record class doesn't easily support an array of strings,
+and trying to use an C<opaque> type to implement this is possible but more
+than a little arcane.  This class provides an interface for creating
+a C array of strings which can be used to provide an C<opaque> pointer
+than can be used by an L<FFI::Platypus::Record> object.
+
+Care needs to be taken!  Because Perl has no way of knowing if/when
+the opaque pointer is no longer being used by C, you have to make
+sure that the L<FFI::Platypus::Record::StringArray> instance remains
+in scope for as long as the C<opaque> pointer is in use by C.
+
 =head1 CONSTRUCTOR
 
 =head2 new
@@ -38,7 +49,7 @@ sub new
   $ffi ||= FFI::Platypus->new( lib => [undef] );
 
   my $size       = @_;
-  my $array      = [map { defined $_ ? strdup($_) : undef } @_];
+  my $array      = [map { defined $_ ? strdup($_) : undef } @_, undef];
   my $opaque     = calloc($size, _ptr_size);
 
   $ffi->function(
@@ -78,7 +89,7 @@ Returns the number of elements in the array of C strings.
 sub size
 {
   my($self) = @_;
-  scalar @{ $self->{array} };
+  scalar @{ $self->{array} } - 1;
 }
 
 =head2 element
