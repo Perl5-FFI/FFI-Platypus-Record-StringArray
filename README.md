@@ -1,11 +1,13 @@
-# FFI::Platypus::Record::StringArray [![Build Status](https://secure.travis-ci.org/Perl5-FFI/FFI-Platypus-Record-StringArray.png)](http://travis-ci.org/Perl5-FFI/FFI-Platypus-Record-StringArray)
+# FFI::Platypus::Record::StringArray [![Build Status](https://travis-ci.org/PerlFFI/FFI-Platypus-Record-StringArray.svg)](http://travis-ci.org/PerlFFI/FFI-Platypus-Record-StringArray)
 
 Array of strings for your FFI record
 
 # SYNOPSIS
 
-    my $a = FFI::Platypus::Record::StringArray->new(qw( foo bar baz ));
-    my $opaque = $a->opaque;
+```perl
+my $a = FFI::Platypus::Record::StringArray->new(qw( foo bar baz ));
+my $opaque = $a->opaque;
+```
 
 # DESCRIPTION
 
@@ -27,7 +29,9 @@ in scope for as long as the `opaque` pointer is in use by C.
 
 ## new
 
-    my $a = FFI::Platypus::Record::StringArray->new(@a);
+```perl
+my $a = FFI::Platypus::Record::StringArray->new(@a);
+```
 
 Creates a new array of C strings.
 
@@ -35,19 +39,25 @@ Creates a new array of C strings.
 
 ## opaque
 
-    my $opaque = $a->opaque;
+```perl
+my $opaque = $a->opaque;
+```
 
 Returns the opaque pointer to the array of C strings.
 
 ## size
 
-    my $size = $a->size;
+```perl
+my $size = $a->size;
+```
 
 Returns the number of elements in the array of C strings.
 
 ## element
 
-    my $element = $a->element($index);
+```perl
+my $element = $a->element($index);
+```
 
 Returns the string in the array of C strings at the given index.
 
