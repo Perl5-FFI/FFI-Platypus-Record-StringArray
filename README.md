@@ -1,4 +1,4 @@
-# FFI::Platypus::Record::StringArray [![Build Status](https://travis-ci.org/PerlFFI/FFI-Platypus-Record-StringArray.svg)](http://travis-ci.org/PerlFFI/FFI-Platypus-Record-StringArray)
+# FFI::Platypus::Record::StringArray ![linux](https://github.com/PerlFFI/FFI-Platypus-Record-StringArray/workflows/linux/badge.svg)
 
 Array of strings for your FFI record
 
