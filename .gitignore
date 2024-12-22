@@ -1,2 +1,4 @@
 /FFI-Platypus-Record-StringArray-*
 /.build
+*.old
+*.orig
